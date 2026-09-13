@@ -1556,54 +1556,6 @@ LK, 13999, LKR" class="framer-JT1sO framer-149jzij framer-v-149jzij framer-1hoq8
 
     <!-- End of bodyEnd -->
 
-<audio id="wedding-song" src="assets/mere-liye-tum-kaafi-ho.mp4" loop preload="auto" playsinline></audio>
-<button id="wedding-song-prompt" type="button" aria-label="Play wedding song">Play song</button>
-<style>
-  #wedding-song-prompt {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    z-index: 999999;
-    display: none;
-    min-height: 44px;
-    padding: 10px 18px;
-    color: #fef6d1;
-    background: rgba(68, 19, 155, 0.92);
-    border: 1px solid rgba(254, 246, 209, 0.65);
-    border-radius: 999px;
-    box-shadow: 0 14px 38px rgba(68, 19, 155, 0.25);
-    font: 600 14px/1.1 Manrope, system-ui, sans-serif;
-    cursor: pointer;
-  }
-</style>
-<script>
-  (() => {
-    const song = document.getElementById("wedding-song");
-    const prompt = document.getElementById("wedding-song-prompt");
-    const playSong = async () => {
-      song.volume = 0.9;
-      song.muted = false;
-
-      document.querySelectorAll("audio.framer-audio").forEach((audio) => {
-        audio.pause();
-        audio.src = "assets/mere-liye-tum-kaafi-ho.mp4";
-      });
-
-      try {
-        await song.play();
-        prompt.style.display = "none";
-      } catch {
-        prompt.style.display = "inline-flex";
-      }
-    };
-
-    prompt.addEventListener("click", playSong);
-    window.addEventListener("DOMContentLoaded", playSong, { once: true });
-    window.addEventListener("load", playSong, { once: true });
-    document.addEventListener("pointerdown", playSong, { once: true });
-    document.addEventListener("keydown", playSong, { once: true });
-  })();
-</script>
 </body>
 
 </html>
