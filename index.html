@@ -1372,6 +1372,7 @@
     align-items: center !important;
     display: flex !important;
     flex-direction: column !important;
+    position: relative !important;
   }
 
   .framer-EZx9L .framer-rmb2bn-container::before {
@@ -1383,28 +1384,32 @@
     display: block;
     flex: none;
     filter: contrast(1.08) saturate(1.08);
-    height: 76px;
-    margin: 0 auto 4px;
+    height: 58px;
+    left: 50%;
+    margin: 0;
     mix-blend-mode: screen;
     opacity: .86;
     pointer-events: none;
-    width: 76px;
+    position: absolute;
+    top: 74px;
+    transform: translateX(-50%);
+    width: 58px;
     z-index: 4;
   }
 
   @media (min-width: 810px) and (max-width: 1199.98px) {
     .framer-EZx9L .framer-rmb2bn-container::before {
-      height: 66px;
-      margin-bottom: 4px;
-      width: 66px;
+      height: 52px;
+      top: 68px;
+      width: 52px;
     }
   }
 
   @media (max-width: 809.98px) {
     .framer-EZx9L .framer-rmb2bn-container::before {
-      height: 52px;
-      margin-bottom: 2px;
-      width: 52px;
+      height: 38px;
+      top: 54px;
+      width: 38px;
     }
   }
 </style>
