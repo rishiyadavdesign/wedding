@@ -1413,6 +1413,81 @@
     }
   }
 </style>
+<script id="force-wedding-music">
+  (function () {
+    var started = false;
+    var selectors = ".framer-audio, audio[src*='mere-liye-tum-kaafi-ho']";
+
+    function getAudios() {
+      return Array.prototype.slice.call(document.querySelectorAll(selectors));
+    }
+
+    function syncAudios(activeAudio) {
+      getAudios().forEach(function (audio) {
+        if (audio === activeAudio) return;
+        audio.pause();
+        audio.currentTime = activeAudio.currentTime || 0;
+      });
+    }
+
+    function playWeddingMusic() {
+      var audios = getAudios();
+      if (!audios.length) return Promise.resolve(false);
+
+      var audio = audios.find(function (item) {
+        return item.offsetParent !== null;
+      }) || audios[0];
+
+      audio.muted = false;
+      audio.defaultMuted = false;
+      audio.volume = 1;
+      audio.loop = true;
+      audio.autoplay = true;
+      audio.playsInline = true;
+      audio.preload = "auto";
+      audio.setAttribute("autoplay", "");
+      audio.setAttribute("playsinline", "");
+      audio.load();
+
+      return audio.play().then(function () {
+        started = true;
+        syncAudios(audio);
+        return true;
+      }).catch(function () {
+        return false;
+      });
+    }
+
+    function retry() {
+      playWeddingMusic();
+      setTimeout(playWeddingMusic, 300);
+      setTimeout(playWeddingMusic, 1200);
+      setTimeout(playWeddingMusic, 3000);
+    }
+
+    function unlock() {
+      if (started) return;
+      retry();
+    }
+
+    document.addEventListener("DOMContentLoaded", retry);
+    window.addEventListener("load", retry);
+    window.addEventListener("pageshow", retry);
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) retry();
+    });
+
+    ["pointerdown", "touchstart", "click", "keydown", "wheel", "scroll"].forEach(function (eventName) {
+      window.addEventListener(eventName, unlock, { passive: true, once: false });
+    });
+
+    document.addEventListener("click", function (event) {
+      if (event.target.closest(".framer-audio-icon, [data-framer-name='Music']")) {
+        playWeddingMusic();
+      }
+    });
+  })();
+</script>
 </head>
 
 <body>
